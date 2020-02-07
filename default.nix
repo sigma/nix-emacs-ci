@@ -4,7 +4,12 @@ let
     sha256 = "16mwf57g8iyq442yx113d07d1arksg5pcdyy6lqq041njy0clnyq";
   }) {};
 
-  pkgs = nixpkgs-1909;
+  nixpkgs-unstable = import (builtins.fetchTarball {
+    url = https://github.com/nixos/nixpkgs/archive/df87e37ff5ea5c14817e616107aaed8a4c0e82f8.tar.gz;
+    sha256 = "0450h0d14fhcgxlv4qn3isabn91payd1ql2dkkjzljpcwpba9ns9";
+  }) {};
+
+  pkgs = nixpkgs-unstable;
 
   release = version: sha256: rec {
     name = "emacs-${version}";
