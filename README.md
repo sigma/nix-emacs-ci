@@ -93,6 +93,13 @@ equivalent of this, in order to run a command inside a transient
 environment containing a specific Emacs, but I haven't figured that
 out yet.
 
+## Adding a new release
+
+If, for example, Emacs 27.2 is released, run:
+```
+nix-shell -p niv --run "niv add emacs-27.2 -v 27.2 -t 'mirror://gnu/emacs/emacs-<version>.tar.gz'"
+```
+Then add an expression for it in `default.nix`, following the existing pattern.
 
 ## Using newer snapshot builds
 
@@ -102,10 +109,8 @@ revision available via Git. That would defeat binary caching, so the
 current plan is to periodically update the `-snapshot` builds
 manually. Send me a pull request to do this:
 
-- Update the commit named in `default.nix`
+- Run `nix-shell -p niv --run "niv update emacs-snapshot"`
 - Try `nix-build -A emacs-snapshot`.
-- This will fail due to SHA256 checksum mismatch of the downloaded archive,
-  so now update that too, and rebuild.
 - Now submit the change as a pull request.
 - Once merged, we'll all be testing against a newer snapshot
   build.
