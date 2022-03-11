@@ -1,5 +1,8 @@
-self: super:
+final: prev:
 let
+  self = final;
+  super = prev;
+
   release = version: sha256: rec {
     inherit version;
     name = "emacs-${version}";
